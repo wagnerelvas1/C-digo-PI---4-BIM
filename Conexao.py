@@ -1,5 +1,6 @@
 import sqlite3
 
+
 arquivoBanco = 'banco.db'
 
 
@@ -25,22 +26,27 @@ def criarTabela(conexao, sqlCriarTabela):
         print(f'Ops... Deu um erro criando a tabela: {e}')
 
 
-def inserirAluno(conexao, sqlInserirAluno):
+def inserirUsuario(conexao, sqlInserirUsuario):
     try:
         cursor = conexao.cursor()
-        cursor.execute(sqlInserirAluno)
+        cursor.execute(sqlInserirUsuario)
         conexao.commit()
     except sqlite3.Error as e:
         print(f'Ops... Deu um erro inserindo dados: {e}')
 
 
-def buscarAlunos(conexao, sqlBuscarAlunos):
-    alunos = None
+def buscarUsuarios(conexao, sqlBuscarUsuarios):
+    usuarios = None
     try:
         cursor = conexao.cursor()
-        cursor.execute(sqlBuscarAlunos)
-        alunos = cursor.fetchall()
+        cursor.execute(sqlBuscarUsuarios)
+        usuarios = cursor.fetchall()
     except sqlite3.Error as e:
         print(f'Ops... Deu um erro exibindo dados: {e}')
     finally:
-        return alunos
+        return usuarios
+
+sqlInserirUsuarioDudu = 'INSERT INTO usuario (nome, tipo, telefone, email, senha) VALUES ("Wagner", "Aluno", "98120302736120", "wagner.relvas", "123123")'
+
+sqlBuscarUsuarios = 'SELECT * FROM usuario'
+# Terminar de ver slides de conexão

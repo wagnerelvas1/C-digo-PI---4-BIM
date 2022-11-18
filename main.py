@@ -7,7 +7,15 @@ criarTabela(conexao, sqlTabelaAtividade)
 criarTabela(conexao, sqlTabelaCalendario)
 criarTabela(conexao, sqlTabelaEndereco)
 
-inserirUsuario(conexao, sqlInserirUsuarioDudu)
+nome = input('Nome: ')
+tipo = input('Tipo: ')
+telefone = input('Telefone: ')
+email = input('Email: ')
+senha = input('Senha: ')
+
+sqlInserirUsuarioNovo = (f'INSERT INTO usuario (nome, tipo, telefone, email, senha) VALUES ("{nome}", "{tipo}", "{telefone}", "{email}", "{senha}")')
+
+inserirUsuario(conexao, sqlInserirUsuarioNovo)
 
 usuarios = buscarUsuarios(conexao, sqlBuscarUsuarios)
 

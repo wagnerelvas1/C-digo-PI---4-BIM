@@ -1,6 +1,5 @@
 import sqlite3
 
-
 arquivoBanco = 'banco.db'
 
 
@@ -46,7 +45,12 @@ def buscarUsuarios(conexao, sqlBuscarUsuarios):
     finally:
         return usuarios
 
-sqlInserirUsuarioDudu = 'INSERT INTO usuario (nome, tipo, telefone, email, senha) VALUES ("Wagner", "Aluno", "98120302736120", "wagner.relvas", "123123")'
 
 sqlBuscarUsuarios = 'SELECT * FROM usuario'
+
+
+
+
+
+
 # Terminar de ver slides de conexão

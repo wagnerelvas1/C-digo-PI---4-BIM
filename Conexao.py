@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3 as sql3
 
 arquivoBanco = 'banco.db'
 
@@ -6,8 +6,8 @@ arquivoBanco = 'banco.db'
 def iniciarConexao():
     conexao = None
     try:
-        conexao = sqlite3.connect(arquivoBanco)
-    except sqlite3.Error as e:
+        conexao = sql3.connect(arquivoBanco)
+    except sql3.Error as e:
         print(f'Ops... Deu um erro iniciando a conexão: {e}')
     return conexao
 
@@ -21,8 +21,29 @@ def criarTabela(conexao, sqlCriarTabela):
     try:
         cursor = conexao.cursor()
         cursor.execute(sqlCriarTabela)
-    except sqlite3.Error as e:
+    except sql3.Error as e:
         print(f'Ops... Deu um erro criando a tabela: {e}')
+
+
+def inserirAtividade(conexao, sqlInserirAtividade):
+    try:
+        cursor = conexao.cursor()
+        cursor.execute(sqlInserirAtividade)
+        conexao.commit()
+    except sql3.Error as e:
+        print(f'Ops... Deu um erro inserindo dados: {e}')
+
+
+def buscarAtividades(conexao, sqlBuscarAtividades):
+    atividades = None
+    try:
+        cursor = conexao.cursor()
+        cursor.execute(sqlBuscarAtividades)
+        atividades = cursor.fetchall()
+    except sql3.Error as e:
+        print(f'Ops... Deu um erro exibindo dados: {e}')
+    finally:
+        return atividades
 
 
 def inserirUsuario(conexao, sqlInserirUsuario):
@@ -30,7 +51,7 @@ def inserirUsuario(conexao, sqlInserirUsuario):
         cursor = conexao.cursor()
         cursor.execute(sqlInserirUsuario)
         conexao.commit()
-    except sqlite3.Error as e:
+    except sql3.Error as e:
         print(f'Ops... Deu um erro inserindo dados: {e}')
 
 
@@ -40,17 +61,19 @@ def buscarUsuarios(conexao, sqlBuscarUsuarios):
         cursor = conexao.cursor()
         cursor.execute(sqlBuscarUsuarios)
         usuarios = cursor.fetchall()
-    except sqlite3.Error as e:
+    except sql3.Error as e:
         print(f'Ops... Deu um erro exibindo dados: {e}')
     finally:
         return usuarios
 
+def executarComando(conexao, sqlComando):
+    try:
+        cursor = conexao.cursor()
+        cursor.execute(sqlComando)
+    except sql3.Error as e:
+        print(f'Ops... Deu um erro executando comando: {e}')
+
 
 sqlBuscarUsuarios = 'SELECT * FROM usuario'
 
-
-
-
-
-
-# Terminar de ver slides de conexão
+sqlBuscarAtividades = 'SELECT * FROM atividade'

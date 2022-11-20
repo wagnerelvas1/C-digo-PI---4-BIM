@@ -21,13 +21,17 @@ sqlTabelaAgendamento = ''' CREATE TABLE IF NOT EXISTS agendamento (
                         id INTEGER PRIMARY KEY NOT NULL
                         ); '''
 
+
 sqlTabelaAtividade = ''' CREATE TABLE IF NOT EXISTS atividade (
                         id INTEGER PRIMARY KEY NOT NULL, 
                         titulo VARCHAR(45) NOT NULL, 
                         descricao VARCHAR(45), 
-                        prazo DATETIME NOT NULL, 
-                        data DATE NOT NULL, 
-                        horario TIME NOT NULL
+                        prazo INTEGER NOT NULL, 
+                        data INTEGER NOT NULL, 
+                        horario INTEGER NOT NULL, 
+                        fk_idUsuario INTEGER, 
+                        FOREIGN KEY (fk_idUsuario)
+                        REFERENCES usuario (id)
                         ); '''
 
 sqlTabelaEndereco = ''' CREATE TABLE IF NOT EXISTS endereco (
